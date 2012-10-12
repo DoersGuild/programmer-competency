@@ -49,6 +49,12 @@ html, body {
 }
 /* Home Page */
 /* Game Pages */
+
+.level-display {
+    float:right;
+    font-size: 80%;
+}
+
 .field {
 	padding:5px 2px;
 }

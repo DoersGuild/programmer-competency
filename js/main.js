@@ -64,7 +64,16 @@ function init() {
     displayHome();
 
     // Setup Event Handlers
-    $("#homePage_begin").on("click", displayComputerScience)
+    $("#homePage_begin").on("click", displayComputerScience);
+    $("input[type='radio']").on("change", function() {
+        //Update the level display
+        var $this = $(this);
+        var id = $this.attr("id");
+        //Get the Level-display's id
+        var level = id[id.length - 1];
+        id = id.substring(0, id.length - 1) + "Display";
+        $("#" + id).text("Level " + level);
+    });
 
     //Setup the back-button
     document.addEventListener("backbutton", function(e) {
