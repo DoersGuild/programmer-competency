@@ -11,4 +11,4 @@ A PhoneGap app that helps you find where you stand as a programmer
 * iPhone 5.1 Simulator 
 
 ## License
-[CC-BY](http://creativecommons.org/licenses/by/3.0/).
+[CC-BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)
