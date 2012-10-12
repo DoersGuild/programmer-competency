@@ -1,0 +1,78 @@
+/* ==========================================================================
+ Doers' custom styles
+ ========================================================================== */
+/* Common */
+html, body {
+	/*Initial SplashScreen*/
+	background:black;
+}
+.page {
+	/* A generic class for pages; Hide at start */
+	display:none;
+	text-align:center;
+	vertical-align:middle;
+}
+.logo {
+	/* A generic class for all logos */
+}
+.emblem {
+	/* A generic class for all icons; Using emblem because icon conflicts with Bootstrap */
+	background-image:url("../img/emblems/circle_grey.png");
+	height:64px;
+	width:64px;
+	display:inline-block;
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+.emblem.emblem-small {
+	/* A generic class for all icons; Using emblem because icon conflicts with Bootstrap */
+	height:32px;
+	width:32px
+}
+.inline-block {
+	/* To display in a single row*/
+	display:inline-block;
+}
+.div-table {
+	/* To treat div like a table*/
+	display:table;
+	vertical-align:middle;
+	text-align:center;
+}
+.div-table> * {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+.radio input[type="radio"] {
+	margin:5px;
+}
+/* Home Page */
+/* Game Pages */
+.field {
+	padding:5px 2px;
+}
+/* Fancy Zebra-Striping */
+.field:nth-child(odd) {
+	background:ghostwhite;
+}
+.choices {
+	background:ivory;
+}
+.choices> div {
+	background:whitesmoke;
+	padding:5px 0px;
+	text-align:left;
+}
+.choices> div:nth-child(odd) {
+	background:ghostwhite;
+}
+.field:nth-child(odd) .choices> div {
+	background:ghostwhite;
+}
+.field:nth-child(odd) .choices> div:nth-child(odd) {
+	background:whitesmoke;
+}
+.field .choices> div:hover, .field .choices> div:active, .choices> div:hover, .choices> div:active, .field:nth-child(odd) .choices> div:hover, .field:nth-child(odd) .choices> div:active {
+	background:lemonchiffon;
+}

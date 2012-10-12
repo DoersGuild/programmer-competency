@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" style="background: black;">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Programmer Competency Quiz</title>
+        <meta name="description" content="Based on a popular HN post">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="phonegap.js" type="text/javascript"></script>
+
+        <script src="js/libs/head.load.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            var startup = function() {
+                console.log("Head start");
+                head.js("js/libs/jquery-1.8.2.min.js", "js/libs/bootstrap.min.js", "js/libs/jquery.cookie.js", "js/main.js", function() {
+                    console.log("Head.JS: Application Ready!");
+                });
+            };
+            if (window.device && (window.device.cordova || window.device.phonegap)) {
+                document.addEventListener("deviceready", startup, false);
+            } else {
+                startup();
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="js/vendor/html5-3.6-respond-1.1.0.min.js"></script>
+        <![endif]-->
+    </head>
+    <body style="background: black;" class="container container-fluid">
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        <div id="homePage" class="page">
+            <h1 class="title">Programmer Competency Matrix</h1>
+            <h6>Note that the knowledge for each level is cumulative; being at level n implies that you also know everything from the levels lower than n.</h6>
+            <div id="homePage_begin" class="btn btn-primary">
+                Begin
+            </div>
+        </div>
+        <div id="computerScience" class="page">
+            <h1 class="title">Computer Science</h1>
+            <div class="field well" id="computerScience_dataStructures">
+                <h3 class="sub-title"> Data Structures </h3>
+                <div class="choices">
+                    <div class="level0">
+                        <label for="computerScience_dataStructures_level0" class="radio">
+                            <input type="radio" id="computerScience_dataStructures_level0" name="computerScience_dataStructures" value="0" checked="checked" />
+                            Doesn't know the difference between Arrays and LinkedLists </label>
+                    </div>
+                    <div class="level1">
+                        <label for="computerScience_dataStructures_level1" class="radio">
+                            <input type="radio" id="computerScience_dataStructures_level1" name="computerScience_dataStructures" value="1" />
+                            Able to explain and use Arrays, LinkedLists, Dictionaries etc in practical programming tasks </label>
+                    </div>
+                    <div class="level2">
+                        <label for="computerScience_dataStructures_level2" class="radio">
+                            <input type="radio" id="computerScience_dataStructures_level2" name="computerScience_dataStructures" value="2" />
+                            Knows space and time tradeoffs of the basic data structures, Arrays vs LinkedLists, Able to explain how hashtables can be implemented and can handle collisions, Priority queues and ways to implement them etc. </label>
+                    </div>
+                    <div class="level3">
+                        <label for="computerScience_dataStructures_level3" class="radio">
+                            <input type="radio" id="computerScience_dataStructures_level3" name="computerScience_dataStructures" value="3" />
+                            Knowledge of advanced data structures like B-trees, binomial and fibonacci heaps, AVL/Red Black trees, Splay Trees, Skip Lists, tries etc. </label>
+                    </div>
+                </div>
+            </div>
+            <div class="field well" id="computerScience_algorithms">
+                <h3 class="sub-title"> Algorithms </h3>
+                <div class="choices">
+                    <div class="level0">
+                        <label for="computerScience_algorithms_level0" class="radio">
+                            <input type="radio" id="computerScience_algorithms_level0" name="computerScience_algorithms" value="0" checked="checked" />
+                            Unable to find the average of numbers in an array </label>
+                    </div>
+                    <div class="level1">
+                        <label for="computerScience_algorithms_level1" class="radio">
+                            <input type="radio" id="computerScience_algorithms_level1" name="computerScience_algorithms" value="1" />
+                            Basic sorting, searching and data structure traversal and retrieval algorithms </label>
+                    </div>
+                    <div class="level2">
+                        <label for="computerScience_algorithms_level2" class="radio">
+                            <input type="radio" id="computerScience_algorithms_level2" name="computerScience_algorithms" value="2" />
+                            Tree, Graph, simple greedy and divide and conquer algorithms, is able to understand the relevance of the levels of this matrix. </label>
+                    </div>
+                    <div class="level3">
+                        <label for="computerScience_algorithms_level3" class="radio">
+                            <input type="radio" id="computerScience_algorithms_level3" name="computerScience_algorithms" value="3" />
+                            Able to recognize and code dynamic programming solutions, good knowledge of graph algorithms, good knowledge of numerical computation algorithms, able to identify NP problems etc. </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
