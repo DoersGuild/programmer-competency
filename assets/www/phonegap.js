@@ -4,7 +4,7 @@
  */
 
 if (navigator.userAgent.toLowerCase().match(/android/)) {
-	document.write('<script charset="utf-8" src="./js/libs/cordova-2.0.0-android.js"><\/script>');
+	document.write('<script charset="utf-8" src="./js/libs/cordova-2.2.0.js"><\/script>');
 } else if (navigator.userAgent.toLowerCase().match(/iphone/) || navigator.userAgent.toLowerCase().match(/ipad/)) {
-	document.write('<script charset="utf-8" src="./js/libs/cordova-2.0.0.js"><\/script>');
+	document.write('<script charset="utf-8" src="./js/libs/cordova-2.2.0.js"><\/script>');
 }
