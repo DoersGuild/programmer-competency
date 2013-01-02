@@ -1098,7 +1098,7 @@ androidExec.processMessages = function(messages) {
     if (messages) {
         messagesFromNative.push(messages);
         while (messagesFromNative.length) {
-            messages = messagesFromNative.shift();
+            messages = messagesFromNative.shift().toString();
             // The Java side can send a * message to indicate that it
             // still has messages waiting to be retrieved.
             // TODO(agrieve): This is currently disabled on the Java side

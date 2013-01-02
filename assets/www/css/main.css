@@ -2,10 +2,6 @@
  Doers' custom styles
  ========================================================================== */
 /* Common */
-html, body {
-	/*Initial SplashScreen*/
-	background:black;
-}
 .page {
 	/* A generic class for pages; Hide at start */
 	display:none;

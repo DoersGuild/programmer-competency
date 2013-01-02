@@ -1,0 +1,30 @@
+{
+    "Computer Science": {
+        "Data Structures": {
+            "0": "Doesn't know the difference between Arrays and LinkedLists",
+            "1": "Able to explain and use Arrays, LinkedLists, Dictionaries etc in practical programming tasks",
+            "2": "Knows space and time tradeoffs of the basic data structures, Arrays vs LinkedLists, Able to explain how hashtables can be implemented and can handle collisions, Priority queues and ways to implement them etc.",
+            "3": "Knowledge of advanced data structures like B-trees, binomial and fibonacci heaps, AVL/Red Black trees, Splay Trees, Skip Lists, tries etc."
+        },
+        "Algorithms": {
+            "0": "Unable to find the average of numbers in an array",
+            "1": "Basic sorting, searching and data structure traversal and retrieval algorithms",
+            "2": "Tree, Graph, simple greedy and divide and conquer algorithms, is able to understand the relevance of the levels of this matrix.",
+            "3": "Able to recognize and code dynamic programming solutions, good knowledge of graph algorithms, good knowledge of numerical computation algorithms, able to identify NP problems etc."
+        },
+        "Systems Programming": {
+            "0": "Doesn't know what a compiler, linker or interpreter is",
+            "1": "Basic understanding of compilers, linker and interpreters. Understands what assembly code is and how things work at the hardware level. Some knowledge of virtual memory and paging.",
+            "2": "Understands kernel mode vs. user mode, multi-threading, synchronization primitives and how they're implemented, able to read assembly code. Understands how networks work, understanding of network protocols and socket level programming.",
+            "3": "Understands the entire programming stack, hardware (CPU + Memory + Cache + Interrupts + microcode), binary code, assembly, static and dynamic linking, compilation, interpretation, JIT compilation, garbage collection, heap, stack, memory addressing..."
+        }
+    },
+    "Software Engineering": {
+        "Source Code Version Control": {
+            "0": "Folder backups by date",
+            "1": "VSS and beginning CVS/SVN user",
+            "2": "Proficient in using CVS and SVN features. Knows how to branch and merge, use patches setup repository properties etc.",
+            "3": "Knowledge of distributed VCS systems. Has tried out Bzr/Mercurial/Darcs/Git"
+        }
+    }
+}
