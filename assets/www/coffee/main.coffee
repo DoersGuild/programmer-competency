@@ -19,7 +19,7 @@ goBack=(e)->
   $modal = $(".modal")
   if $modal.is(":visible")
     # Hide the modal that is currently visible
-    $modal.modal("hide")
+    $modal.filter(":visible").modal("hide")
   else if window.cookieJar("currentPage") isnt "#homePage"
     # Go to the previous page
     displayPage(window.cookieJar("previousPage"))
@@ -45,7 +45,7 @@ displayPage=(baseID)->
 
 displayHome=()->
   # Display the home page
-  displayPage("#home")
+  displayPage("#homePage")
   
 displayComputerScience=()->
   # Display Computer-Science questions

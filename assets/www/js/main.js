@@ -25,7 +25,7 @@ goBack = function(e) {
   console.log("Back button fired");
   $modal = $(".modal");
   if ($modal.is(":visible")) {
-    $modal.modal("hide");
+    $modal.filter(":visible").modal("hide");
   } else if (window.cookieJar("currentPage") !== "#homePage") {
     displayPage(window.cookieJar("previousPage"));
   } else {
@@ -53,7 +53,7 @@ displayPage = function(baseID) {
 };
 
 displayHome = function() {
-  return displayPage("#home");
+  return displayPage("#homePage");
 };
 
 displayComputerScience = function() {

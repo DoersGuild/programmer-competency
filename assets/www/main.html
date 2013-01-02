@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" style="background: black;">
+<html class="no-js">
     <!--<![endif]-->
     <head>
         <meta charset="utf-8">
@@ -26,9 +26,12 @@
                     console.log("Head.JS: Application Ready!");
                 });
             };
-            if (window.device && (window.device.cordova || window.device.phonegap)) {
+            console.log("Cordova Agent:" + window.cordovaAgent);
+            if (window.cordovaAgent || window.device && (window.device.cordova || window.device.phonegap)) {
+                console.log("Congrats! You are on a device that is compatiable with Cordova");
                 document.addEventListener("deviceready", startup, false);
             } else {
+                console.error("You are on a device that is not compatiable with Cordova");
                 startup();
             }
         </script>
@@ -37,7 +40,7 @@
         <script src="js/vendor/html5-3.6-respond-1.1.0.min.js"></script>
         <![endif]-->
     </head>
-    <body style="background: black;" class="container container-fluid">
+    <body class="container container-fluid">
         <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
