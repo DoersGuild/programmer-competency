@@ -12,6 +12,19 @@ preventDefault=(e)->
   e.returnValue = false
   false
   
+## Web-Services
+getQuestions=()->
+  # Get the questions data
+  $.ajax
+        url : url
+        type : "POST"
+        data : {}
+        dataType : "JSON"
+        cache : true
+  .done (response) ->
+        # Update the locally stored questions
+        console.log("Questions: " + JSON.stringify(response))
+  
 ## Actions
 goBack=(e)->
   # Handle the Back-Button
@@ -47,9 +60,9 @@ displayHome=()->
   # Display the home page
   displayPage("#homePage")
   
-displayComputerScience=()->
-  # Display Computer-Science questions
-  displayPage("#computerScience")
+displayQuestions=()->
+  # Display the questions page
+  displayPage("#questionsPage")
   
 init=()->
   # Initialize the app
@@ -93,6 +106,9 @@ $.ajaxSetup
 window.settings = {}
 
 window.cookieJar?=$.cookie
+
+# Storage
+window.storage = {}
 
 setTimeout(init, 0)
 

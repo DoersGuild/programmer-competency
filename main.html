@@ -20,27 +20,13 @@
         <script src="js/libs/head.load.min.js" type="text/javascript"></script>
 
         <script type="text/javascript">
-            function onLoad() {
-                console.log("On Load triggered");
-                document.addEventListener("deviceready", function() {
-                    alert("Body Loaded: Hello World");
-                }, false);
-            }
-
-
-            document.addEventListener("deviceready", function() {
-                alert("Global: Hello World");
-            }, true);
-            document.addEventListener("deviceready", function() {
-                alert("Global: Hello World 2 - false");
-            }, false);
-
             var startup = function() {
                 console.log("Head start");
                 head.js("js/libs/jquery-1.8.2.min.js", "js/libs/bootstrap.min.js", "js/libs/jquery.cookie.js", "js/main.js", function() {
                     console.log("Head.JS: Application Ready!");
                 });
             };
+            
             console.log("Cordova Agent:" + window.cordovaAgent);
             if (window.cordovaAgent || window.device && (window.device.cordova || window.device.phonegap)) {
                 console.log("Congrats! You are on a device that is compatiable with Cordova");
