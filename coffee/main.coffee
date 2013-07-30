@@ -1,3 +1,4 @@
+
 ###
  Author: Doers' Guild
  http://www.doersguild.com
@@ -71,7 +72,7 @@ do ($ = jQuery)=>
     # Initialize the app
     displayHome()
     document.addEventListener("backbutton", goBack, false)
-    $("#homePage_begin").on("click", displayComputerScience)
+    $("#homePage_begin").on("click", displayQuestions)
     $("input[type='radio']").on "change", ()->
       #Update the level display
       $this = $(this);

@@ -72,7 +72,7 @@ var _this = this;
   init = function() {
     displayHome();
     document.addEventListener("backbutton", goBack, false);
-    $("#homePage_begin").on("click", displayComputerScience);
+    $("#homePage_begin").on("click", displayQuestions);
     $("input[type='radio']").on("change", function() {
       var $this, id, level;
       $this = $(this);
