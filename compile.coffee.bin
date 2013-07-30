@@ -1,2 +1,3 @@
+coffee -v
 coffee -o js/ -bc coffee/*
 echo "DONE"

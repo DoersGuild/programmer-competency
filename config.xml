@@ -6,7 +6,7 @@ version   = "0.0.1">
 
 	<name>ProComp</name>
 	<description>Programmer Competency App</description>
-	<preference name="phonegap-version" value="2.0.0" />
+	<preference name="phonegap-version" value="2.9.0" />
     
     <preference name="orientation" value="default" />
     
