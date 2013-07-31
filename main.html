@@ -56,32 +56,38 @@
                 </div>
             </div>
             <div id="questionsPage" class="page hide">
+                <button id="questionsPage_section_prev" class="hide btn pull-left">
+                    <i class="icon-double-angle-left"></i> Previous Section
+                </button>
+                <button id="questionsPage_section_next" class="hide btn pull-right">
+                    Next Section <i class="icon-double-angle-right"></i>
+                </button>
                 <h1 class="title" id="questionsPage_title">Computer Science</h1>
                 <div class="field content-well" id="questionsPage_field">
                     <div id="questionsPage_field_levelDisplay" class="level-display">
                         Level 0
                     </div>
-                    <h3 class="sub-title">Data Structures</h3>
+                    <h3 id="questionsPage_subTitle" class="sub-title">Data Structures</h3>
                     <div class="choices">
                         <label for="questionsPage_field_level0" class="radio level0">
                             <input type="radio" id="questionsPage_field_level0" name="computerScience_dataStructures" value="0" checked="checked" />
-                            Doesn't know the difference between Arrays and LinkedLists </label>
+                            <span id="questionsPage_field_text_level0">Doesn't know the difference between Arrays and LinkedLists </span></label>
                         <label for="questionsPage_field_level1" class="radio level1">
                             <input type="radio" id="questionsPage_field_level1" name="computerScience_dataStructures" value="1" />
-                            Able to explain and use Arrays, LinkedLists, Dictionaries etc in practical programming tasks </label>
+                            <span id="questionsPage_field_text_level1">Able to explain and use Arrays, LinkedLists, Dictionaries etc in practical programming tasks </span></label>
                         <label for="questionsPage_field_level2" class="radio level2">
                             <input type="radio" id="questionsPage_field_level2" name="computerScience_dataStructures" value="2" />
-                            Knows space and time tradeoffs of the basic data structures, Arrays vs LinkedLists, Able to explain how hashtables can be implemented and can handle collisions, Priority queues and ways to implement them etc. </label>
+                            <span id="questionsPage_field_text_level2">Knows space and time tradeoffs of the basic data structures, Arrays vs LinkedLists, Able to explain how hashtables can be implemented and can handle collisions, Priority queues and ways to implement them etc. </span></label>
                         <label for="questionsPage_field_level3" class="radio level3">
                             <input type="radio" id="questionsPage_field_level3" name="computerScience_dataStructures" value="3" />
-                            Knowledge of advanced data structures like B-trees, binomial and fibonacci heaps, AVL/Red Black trees, Splay Trees, Skip Lists, tries etc. </label>
+                            <span id="questionsPage_field_text_level3">Knowledge of advanced data structures like B-trees, binomial and fibonacci heaps, AVL/Red Black trees, Splay Trees, Skip Lists, tries etc. </span></label>
                     </div>
                 </div>
                 <button id="questionsPage_prev" class="hide btn pull-left">
-                    <i class="icon-rarrow"></i> Previous
+                    <i class="icon-angle-left"></i> Previous Topic
                 </button>
                 <button id="questionsPage_next" class="btn pull-right">
-                    Next <i class="icon-larrow"></i>
+                    Next Topic <i class="icon-angle-right"></i>
                 </button>
             </div>
         </div>

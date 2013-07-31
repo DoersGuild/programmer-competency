@@ -130,7 +130,7 @@ a.doer-font {
 }
 /* Fancy Zebra-Striping */
 .field:nth-child(odd) {
-    background: ghostwhite;
+    background: #fcfcfc;
 }
 .choices {
     background: ivory;
@@ -142,10 +142,10 @@ a.doer-font {
     margin: 3px auto;
 }
 .choices > *:nth-child(odd) {
-    background: ghostwhite;
+    background: #fcfcfc;
 }
 .field:nth-child(odd) .choices > * {
-    background: ghostwhite;
+    background: #fcfcfc;
 }
 .field:nth-child(odd) .choices > *:nth-child(odd) {
     background: whitesmoke;
