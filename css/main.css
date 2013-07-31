@@ -30,12 +30,8 @@ h1, h2, h3, h4, h5, h6, .title, .btn-large {
     font-family: 'Oleo Script Swash Caps', 'Script MT Bold', sans-serif;
 }
 
-.doer-red, .doer-red a {
+.doer-red, .doer-red a, .doer-red a:hover, a.doer-red, a.doer-red:hover {
     color: #ED1C24;
-}
-a.doer-font {
-    /* Add an underline for all links*/
-    text-decoration: underline;
 }
 
 .content {
