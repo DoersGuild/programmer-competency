@@ -115,10 +115,14 @@ h1, h2, h3, h4, h5, h6, .title, .btn-large {
 /* Home Page */
 /* Game Pages */
 
-.level-display {
-    float: right;
+.text-small {
     font-size: 80%;
+}
+.text-small.pull-right {
     margin-right: 5px;
+}
+.text-small.pull-left {
+    margin-left: 5px;
 }
 
 .field {

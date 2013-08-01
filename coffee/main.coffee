@@ -25,14 +25,19 @@ do ($ = jQuery)=>
           window.cookieJar("questions_obj", response)
           # Put it in an array for easier traversal
           arr = []
+          count_per_section = {}
           for own section_name, section of response
+            count_per_section[section_name]=0
             for own topic_name, topic_options of section
               arr.push
                 section: section_name
                 topic: topic_name
                 options: topic_options
                 selected: 0
+                section_index: count_per_section[section_name]
+              count_per_section[section_name]++
           window.cookieJar("questions", arr)
+          window.cookieJar("count_per_section", count_per_section)
     , "json")
 
 
@@ -80,15 +85,46 @@ do ($ = jQuery)=>
     $("#questionsPage_field_level"+question.selected).prop("checked", true).trigger("change")
     displayPage("#questionsPage")
 
+  toggleNextAndPrevButtons=()->
+    # Show/Hide Next and prev section buttons
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
+    questions = window.cookieJar("questions") || []
+
+    if questions[questions.length - 1].section == questions[currentQuestion].section then $("#questionsPage_section_next").hide() else $("#questionsPage_section_next").show()
+    if questions[0].section == questions[currentQuestion].section then $("#questionsPage_section_prev").hide() else $("#questionsPage_section_prev").show()
+
+    # Show/Hide Next and prev question buttons
+    if currentQuestion<=0 then $("#questionsPage_prev").hide() else $("#questionsPage_prev").show()
+    if currentQuestion>=questions.length-1 then $("#questionsPage_next").hide() else $("#questionsPage_next").show()
+
+  loadNextSection=()->
+    # Load the first item in the next section
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
+    questions = window.cookieJar("questions") || []
+    question = questions[currentQuestion]
+    currentQuestion+=(window.cookieJar("count_per_section")?[question.section] - question.section_index)
+    window.cookieJar("currentQuestion", Math.min(currentQuestion, questions.length-1))
+    toggleNextAndPrevButtons()
+    displayQuestion(currentQuestion)
+
+  loadPrevSection=()->
+    # Load the first item in the previous section
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
+    questions = window.cookieJar("questions") || []
+    currentQuestion -= questions[currentQuestion].section_index + 1
+    currentQuestion -= window.cookieJar("count_per_section")?[questions[currentQuestion].section] - 1
+    window.cookieJar("currentQuestion", Math.max(currentQuestion, 0))
+    toggleNextAndPrevButtons()
+    displayQuestion(currentQuestion)
+
   loadNextQuestion=()->
     # load & display the next question
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
     questions = window.cookieJar("questions") || []
     currentQuestion++
-    $("#questionsPage_prev, #questionsPage_next").show()
-    $("#questionsPage_next").hide() if currentQuestion>=questions.length
     # currentQuestion = if currentQuestion>=questions.length then 0 else currentQuestion
     window.cookieJar("currentQuestion", currentQuestion)
+    toggleNextAndPrevButtons()
     displayQuestion(currentQuestion)
 
   loadPrevQuestion=()->
@@ -96,10 +132,9 @@ do ($ = jQuery)=>
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
     questions = window.cookieJar("questions") || []
     currentQuestion--
-    $("#questionsPage_prev, #questionsPage_next").show()
-    $("#questionsPage_prev").hide() if currentQuestion<=0
     # currentQuestion = if currentQuestion<0 then questions.length else currentQuestion
     window.cookieJar("currentQuestion", currentQuestion)
+    toggleNextAndPrevButtons()
     displayQuestion(currentQuestion)
 
 
@@ -110,16 +145,25 @@ do ($ = jQuery)=>
     $("#homePage_begin").on("click", displayQuestion)
     $("#questionsPage_next").on("click", loadNextQuestion)
     $("#questionsPage_prev").on("click", loadPrevQuestion)
+    $("#questionsPage_section_next").on("click", loadNextSection)
+    $("#questionsPage_section_prev").on("click", loadPrevSection)
     $("input[type='radio']").on "change", ()->
       #Update the level display
       $this = $(this);
       id = $this.attr("id");
+
       #Get the Level-display's id
       level = id[id.length - 1];
-      id = id.substring(0, id.length - 1) + "Display";
-      $("#" + id).text("Level " + level);
+      $("#questionsPage_field_levelDisplay").text("Level " + level);
       index = $("#questionsPage_subTitle").data("index")
+
+      # Show section item index
+      currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0
       questions = window.cookieJar("questions")
+      question = questions[currentQuestion]
+      $("#questionsPage_field_itemIndex").text((question.section_index + 1) + " of " + window.cookieJar("count_per_section")?[question.section])
+
+      # Update level in DB
       questions?[index]?.selected = level
       window.cookieJar("questions", questions)
       true

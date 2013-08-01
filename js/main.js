@@ -10,7 +10,7 @@ var _this = this,
 
 (function($) {
   "use strict";
-  var displayHome, displayPage, displayQuestion, getQuestions, goBack, init, loadNextQuestion, loadPrevQuestion, preventDefault;
+  var displayHome, displayPage, displayQuestion, getQuestions, goBack, init, loadNextQuestion, loadNextSection, loadPrevQuestion, loadPrevSection, preventDefault, toggleNextAndPrevButtons;
   preventDefault = function(e) {
     var method, methods, _i, _len;
     methods = ["preventDefault", "stopImmediatePropagation", "stopPropagation", "stop"];
@@ -25,13 +25,15 @@ var _this = this,
   };
   getQuestions = function() {
     return $.get("./js/data/questions.json", {}, function(response) {
-      var arr, section, section_name, topic_name, topic_options;
+      var arr, count_per_section, section, section_name, topic_name, topic_options;
       console.log("Questions: " + JSON.stringify(response));
       window.cookieJar("questions_obj", response);
       arr = [];
+      count_per_section = {};
       for (section_name in response) {
         if (!__hasProp.call(response, section_name)) continue;
         section = response[section_name];
+        count_per_section[section_name] = 0;
         for (topic_name in section) {
           if (!__hasProp.call(section, topic_name)) continue;
           topic_options = section[topic_name];
@@ -39,11 +41,14 @@ var _this = this,
             section: section_name,
             topic: topic_name,
             options: topic_options,
-            selected: 0
+            selected: 0,
+            section_index: count_per_section[section_name]
           });
+          count_per_section[section_name]++;
         }
       }
-      return window.cookieJar("questions", arr);
+      window.cookieJar("questions", arr);
+      return window.cookieJar("count_per_section", count_per_section);
     }, "json");
   };
   goBack = function(e) {
@@ -95,16 +100,58 @@ var _this = this,
     $("#questionsPage_field_level" + question.selected).prop("checked", true).trigger("change");
     return displayPage("#questionsPage");
   };
+  toggleNextAndPrevButtons = function() {
+    var currentQuestion, questions;
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
+    questions = window.cookieJar("questions") || [];
+    if (questions[questions.length - 1].section === questions[currentQuestion].section) {
+      $("#questionsPage_section_next").hide();
+    } else {
+      $("#questionsPage_section_next").show();
+    }
+    if (questions[0].section === questions[currentQuestion].section) {
+      $("#questionsPage_section_prev").hide();
+    } else {
+      $("#questionsPage_section_prev").show();
+    }
+    if (currentQuestion <= 0) {
+      $("#questionsPage_prev").hide();
+    } else {
+      $("#questionsPage_prev").show();
+    }
+    if (currentQuestion >= questions.length - 1) {
+      return $("#questionsPage_next").hide();
+    } else {
+      return $("#questionsPage_next").show();
+    }
+  };
+  loadNextSection = function() {
+    var currentQuestion, question, questions, _ref;
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
+    questions = window.cookieJar("questions") || [];
+    question = questions[currentQuestion];
+    currentQuestion += ((_ref = window.cookieJar("count_per_section")) != null ? _ref[question.section] : void 0) - question.section_index;
+    window.cookieJar("currentQuestion", Math.min(currentQuestion, questions.length - 1));
+    toggleNextAndPrevButtons();
+    return displayQuestion(currentQuestion);
+  };
+  loadPrevSection = function() {
+    var currentQuestion, questions, _ref;
+    currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
+    questions = window.cookieJar("questions") || [];
+    currentQuestion -= questions[currentQuestion].section_index + 1;
+    currentQuestion -= ((_ref = window.cookieJar("count_per_section")) != null ? _ref[questions[currentQuestion].section] : void 0) - 1;
+    window.cookieJar("currentQuestion", Math.max(currentQuestion, 0));
+    toggleNextAndPrevButtons();
+    return displayQuestion(currentQuestion);
+  };
   loadNextQuestion = function() {
     var currentQuestion, questions;
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
     questions = window.cookieJar("questions") || [];
     currentQuestion++;
-    $("#questionsPage_prev, #questionsPage_next").show();
-    if (currentQuestion >= questions.length) {
-      $("#questionsPage_next").hide();
-    }
     window.cookieJar("currentQuestion", currentQuestion);
+    toggleNextAndPrevButtons();
     return displayQuestion(currentQuestion);
   };
   loadPrevQuestion = function() {
@@ -112,11 +159,8 @@ var _this = this,
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
     questions = window.cookieJar("questions") || [];
     currentQuestion--;
-    $("#questionsPage_prev, #questionsPage_next").show();
-    if (currentQuestion <= 0) {
-      $("#questionsPage_prev").hide();
-    }
     window.cookieJar("currentQuestion", currentQuestion);
+    toggleNextAndPrevButtons();
     return displayQuestion(currentQuestion);
   };
   init = function() {
@@ -125,18 +169,22 @@ var _this = this,
     $("#homePage_begin").on("click", displayQuestion);
     $("#questionsPage_next").on("click", loadNextQuestion);
     $("#questionsPage_prev").on("click", loadPrevQuestion);
+    $("#questionsPage_section_next").on("click", loadNextSection);
+    $("#questionsPage_section_prev").on("click", loadPrevSection);
     $("input[type='radio']").on("change", function() {
-      var $this, id, index, level, questions, _ref;
+      var $this, currentQuestion, id, index, level, question, questions, _ref, _ref1;
       $this = $(this);
       id = $this.attr("id");
       level = id[id.length - 1];
-      id = id.substring(0, id.length - 1) + "Display";
-      $("#" + id).text("Level " + level);
+      $("#questionsPage_field_levelDisplay").text("Level " + level);
       index = $("#questionsPage_subTitle").data("index");
+      currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
       questions = window.cookieJar("questions");
+      question = questions[currentQuestion];
+      $("#questionsPage_field_itemIndex").text((question.section_index + 1) + " of " + ((_ref = window.cookieJar("count_per_section")) != null ? _ref[question.section] : void 0));
       if (questions != null) {
-        if ((_ref = questions[index]) != null) {
-          _ref.selected = level;
+        if ((_ref1 = questions[index]) != null) {
+          _ref1.selected = level;
         }
       }
       window.cookieJar("questions", questions);
