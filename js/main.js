@@ -166,6 +166,11 @@ var _this = this,
   init = function() {
     displayHome();
     document.addEventListener("backbutton", goBack, false);
+    $('a[target="_blank"]').on("click", function(e) {
+      preventDefault(e);
+      window.open($(this).prop("href"), '_blank', 'location=yes');
+      return false;
+    });
     $("#homePage_begin").on("click", displayQuestion);
     $("#questionsPage_next").on("click", loadNextQuestion);
     $("#questionsPage_prev").on("click", loadPrevQuestion);
@@ -224,5 +229,7 @@ var _this = this,
   };
   window.storage = {};
   getQuestions();
-  return setTimeout(init, 0);
+  return $(function() {
+    return setTimeout(init, 0);
+  });
 })(jQuery);

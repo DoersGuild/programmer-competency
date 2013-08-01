@@ -142,6 +142,11 @@ do ($ = jQuery)=>
     # Initialize the app
     displayHome()
     document.addEventListener("backbutton", goBack, false)
+    $('a[target="_blank"]').on("click", (e)->
+      preventDefault(e)
+      window.open($(this).prop("href"), '_blank', 'location=yes')
+      false
+    )
     $("#homePage_begin").on("click", displayQuestion)
     $("#questionsPage_next").on("click", loadNextQuestion)
     $("#questionsPage_prev").on("click", loadPrevQuestion)
@@ -205,5 +210,5 @@ do ($ = jQuery)=>
 
   getQuestions()
 
-  setTimeout(init, 0)
+  $ ()->setTimeout(init, 0)
 
