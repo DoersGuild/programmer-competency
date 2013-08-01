@@ -153,3 +153,7 @@ h1, h2, h3, h4, h5, h6, .title, .btn-large {
 .field .choices > *:hover, .field .choices > *:active, .choices > *:hover, .choices > *:active, .field:nth-child(odd) .choices > *:hover, .field:nth-child(odd) .choices > *:active {
     background: lemonchiffon;
 }
+
+#questionsPage_summary {
+    margin: 4px auto;
+}
