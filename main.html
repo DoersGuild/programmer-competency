@@ -26,7 +26,7 @@
             (function() {"use strict";
                 var startup = function() {
                     console.log("Head start");
-                    Modernizr.load(["js/libs/jquery-2.0.3.min.js", "js/libs/bootstrap.min.js", "js/libs/jquery.cookie.js", "js/main.js"]);
+                    Modernizr.load(["js/libs/jquery-2.0.3.min.js", "js/libs/bootstrap.min.js", "js/libs/jquery.mobile-events.min.js", "js/main.js"]);
                 };
 
                 console.log("Cordova Agent:" + window.cordovaAgent);
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div id="questionsPage" class="page hide">
-                <h1 class="title" id="questionsPage_title">Computer Science</h1>
+                <h2 class="title" id="questionsPage_title">Computer Science</h2>
                 <div class="field content-well" id="questionsPage_field">
                     <div id="questionsPage_field_levelDisplay" class="text-small pull-right">
                         Level 0
@@ -83,23 +83,33 @@
                     </div>
                 </div>
                 <div class="center text-center">
-                <button id="questionsPage_section_prev" class="hide btn btn-large pull-left" title="Previous Section">
-                    <i class="icon-double-angle-left icon-large"></i>
-                </button>
-                <button id="questionsPage_section_next" class="btn btn-large pull-right" title="Next Section">
-                    <i class="icon-double-angle-right icon-large"></i>
-                </button>
-                <button id="questionsPage_prev" class="hide btn btn-large pull-left" title="Previous Topic">
-                    <i class="icon-angle-left icon-large"></i>
-                </button>
-                <button id="questionsPage_next" class="btn btn-large pull-right" title="Next Topic">
-                    <i class="icon-angle-right icon-large"></i>
-                <button id="questionsPage_summary" class="btn btn-large" title="Summary">
-                    <i class="icon-book icon-large"></i> Summary
-                </button>
-                </button></div>
+                    <button id="questionsPage_section_prev" class="hide btn btn-large pull-left margin-bottom5" title="Previous Section">
+                        <i class="icon-double-angle-left icon-large"></i>
+                    </button>
+                    <button id="questionsPage_section_next" class="btn btn-large pull-right margin-bottom5" title="Next Section">
+                        <i class="icon-double-angle-right icon-large"></i>
+                    </button>
+                    <button id="questionsPage_prev" class="hide btn btn-large pull-left margin-bottom5" title="Previous Topic">
+                        <i class="icon-angle-left icon-large"></i>
+                    </button>
+                    <button id="questionsPage_next" class="btn btn-large pull-right margin-bottom5" title="Next Topic">
+                        <i class="icon-angle-right icon-large"></i>
+                    </button>
+                    <button id="questionsPage_summary" class="btn btn-large margin-bottom5" title="Summary">
+                        <i class="icon-book icon-large"></i> Summary
+                    </button>
+                </div>
             </div>
-            <div id="summaryPage" class="page hide"></div>
+            <div id="summaryPage" class="page hide">
+                <button class="btn btn-large pull-left button-back">
+                    <i class="icon-circle-arrow-left icon-large"></i> Back
+                </button>
+                <h2>Score Summary: </h2>
+                <div id="summaryPage_summary" class="content-well"></div>
+                <button class="btn btn-large pull-left button-back">
+                    <i class="icon-circle-arrow-left icon-large"></i> Back
+                </button>
+            </div>
         </div>
         <footer class="container">
             <div class="text-right">

@@ -75,6 +75,49 @@ do ($ = jQuery)=>
     # Display the home page
     displayPage("#homePage")
 
+  displaySummary=()->
+    # Display the home page
+    questions = window.cookieJar("questions") || []
+    markup = ''
+    currentSection = ""
+    total = 0
+    count = 0
+    sectionTotal = 0
+    for question, index in questions
+      if question.section != currentSection
+        # Section change
+        currentSection = question.section
+        total += parseInt(sectionTotal, 10)
+        sectionCount = parseInt(window.cookieJar("count_per_section")?[question.section], 10)
+        count += sectionCount
+        console.log currentSection, "Counts", sectionTotal, sectionCount, total, count
+        if markup != ''
+          # Add closing tags iff not first
+          markup += '<tr><th>Average</th><th>'+(sectionTotal/sectionCount).toFixed(2)+'</th></tr>'
+          markup += '</table>'
+          markup += '</div>'
+        sectionCount = 0
+        sectionTotal = 0
+        markup += '<div class="well well-small">'
+        markup += '<h4>' + question.section + '</h4>'
+        markup += '<hr/>'
+        markup += '<table class="table table-bordered table-striped">'
+        markup += '<tr><th>Topic</th><th>Level</th></tr>'
+      # Add this topic row
+      markup += '<tr><td>'+question.topic+'</td><td>'+question.selected+'</td></tr>'
+      sectionTotal += parseInt(question.selected, 10)
+      if index == questions.length-1
+        # Last item
+        total += parseInt(sectionTotal, 10)
+        sectionCount = parseInt(window.cookieJar("count_per_section")?[question.section], 10)
+        count += sectionCount
+        markup += '<tr><th>Average</th><th>'+(sectionTotal/sectionCount).toFixed(2)+'</th></tr>'
+        markup += '</table>'
+        markup += '</div>'
+    markup = '<h3> Overall Level : ' + (total/count).toFixed(2) + '</h3>' + markup
+    $("#summaryPage_summary").html(markup)
+    displayPage("#summaryPage")
+
   displayQuestion=(index)->
     # Display the question from the given index
     index = parseInt(index, 10) || 0
@@ -123,7 +166,7 @@ do ($ = jQuery)=>
     questions = window.cookieJar("questions") || []
     currentQuestion++
     # currentQuestion = if currentQuestion>=questions.length then 0 else currentQuestion
-    window.cookieJar("currentQuestion", currentQuestion)
+    window.cookieJar("currentQuestion", Math.min(currentQuestion, questions.length-1))
     toggleNextAndPrevButtons()
     displayQuestion(currentQuestion)
 
@@ -133,7 +176,7 @@ do ($ = jQuery)=>
     questions = window.cookieJar("questions") || []
     currentQuestion--
     # currentQuestion = if currentQuestion<0 then questions.length else currentQuestion
-    window.cookieJar("currentQuestion", currentQuestion)
+    window.cookieJar("currentQuestion", Math.max(currentQuestion, 0))
     toggleNextAndPrevButtons()
     displayQuestion(currentQuestion)
 
@@ -142,12 +185,15 @@ do ($ = jQuery)=>
     # Initialize the app
     displayHome()
     document.addEventListener("backbutton", goBack, false)
+    $('.button-back').on("click", goBack)
     $('a[target="_blank"]').on("click", (e)->
       preventDefault(e)
       window.open($(this).prop("href"), '_blank', 'location=yes')
       false
     )
     $("#homePage_begin").on("click", displayQuestion)
+    $("#questionsPage_summary").on("click", displaySummary)
+    $("#questionsPage").on("swipeleft", loadNextQuestion).on("swiperight", loadPrevQuestion)
     $("#questionsPage_next").on("click", loadNextQuestion)
     $("#questionsPage_prev").on("click", loadPrevQuestion)
     $("#questionsPage_section_next").on("click", loadNextSection)

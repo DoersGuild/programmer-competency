@@ -10,7 +10,7 @@ var _this = this,
 
 (function($) {
   "use strict";
-  var displayHome, displayPage, displayQuestion, getQuestions, goBack, init, loadNextQuestion, loadNextSection, loadPrevQuestion, loadPrevSection, preventDefault, toggleNextAndPrevButtons;
+  var displayHome, displayPage, displayQuestion, displaySummary, getQuestions, goBack, init, loadNextQuestion, loadNextSection, loadPrevQuestion, loadPrevSection, preventDefault, toggleNextAndPrevButtons;
   preventDefault = function(e) {
     var method, methods, _i, _len;
     methods = ["preventDefault", "stopImmediatePropagation", "stopPropagation", "stop"];
@@ -85,6 +85,50 @@ var _this = this,
   displayHome = function() {
     return displayPage("#homePage");
   };
+  displaySummary = function() {
+    var count, currentSection, index, markup, question, questions, sectionCount, sectionTotal, total, _i, _len, _ref, _ref1;
+    questions = window.cookieJar("questions") || [];
+    markup = '';
+    currentSection = "";
+    total = 0;
+    count = 0;
+    sectionTotal = 0;
+    for (index = _i = 0, _len = questions.length; _i < _len; index = ++_i) {
+      question = questions[index];
+      if (question.section !== currentSection) {
+        currentSection = question.section;
+        total += parseInt(sectionTotal, 10);
+        sectionCount = parseInt((_ref = window.cookieJar("count_per_section")) != null ? _ref[question.section] : void 0, 10);
+        count += sectionCount;
+        console.log(currentSection, "Counts", sectionTotal, sectionCount, total, count);
+        if (markup !== '') {
+          markup += '<tr><th>Average</th><th>' + (sectionTotal / sectionCount).toFixed(2) + '</th></tr>';
+          markup += '</table>';
+          markup += '</div>';
+        }
+        sectionCount = 0;
+        sectionTotal = 0;
+        markup += '<div class="well well-small">';
+        markup += '<h4>' + question.section + '</h4>';
+        markup += '<hr/>';
+        markup += '<table class="table table-bordered table-striped">';
+        markup += '<tr><th>Topic</th><th>Level</th></tr>';
+      }
+      markup += '<tr><td>' + question.topic + '</td><td>' + question.selected + '</td></tr>';
+      sectionTotal += parseInt(question.selected, 10);
+      if (index === questions.length - 1) {
+        total += parseInt(sectionTotal, 10);
+        sectionCount = parseInt((_ref1 = window.cookieJar("count_per_section")) != null ? _ref1[question.section] : void 0, 10);
+        count += sectionCount;
+        markup += '<tr><th>Average</th><th>' + (sectionTotal / sectionCount).toFixed(2) + '</th></tr>';
+        markup += '</table>';
+        markup += '</div>';
+      }
+    }
+    markup = '<h3> Overall Level : ' + (total / count).toFixed(2) + '</h3>' + markup;
+    $("#summaryPage_summary").html(markup);
+    return displayPage("#summaryPage");
+  };
   displayQuestion = function(index) {
     var i, option, question, _ref, _ref1;
     index = parseInt(index, 10) || 0;
@@ -150,7 +194,7 @@ var _this = this,
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
     questions = window.cookieJar("questions") || [];
     currentQuestion++;
-    window.cookieJar("currentQuestion", currentQuestion);
+    window.cookieJar("currentQuestion", Math.min(currentQuestion, questions.length - 1));
     toggleNextAndPrevButtons();
     return displayQuestion(currentQuestion);
   };
@@ -159,19 +203,22 @@ var _this = this,
     currentQuestion = parseInt(window.cookieJar("currentQuestion"), 10) || 0;
     questions = window.cookieJar("questions") || [];
     currentQuestion--;
-    window.cookieJar("currentQuestion", currentQuestion);
+    window.cookieJar("currentQuestion", Math.max(currentQuestion, 0));
     toggleNextAndPrevButtons();
     return displayQuestion(currentQuestion);
   };
   init = function() {
     displayHome();
     document.addEventListener("backbutton", goBack, false);
+    $('.button-back').on("click", goBack);
     $('a[target="_blank"]').on("click", function(e) {
       preventDefault(e);
       window.open($(this).prop("href"), '_blank', 'location=yes');
       return false;
     });
     $("#homePage_begin").on("click", displayQuestion);
+    $("#questionsPage_summary").on("click", displaySummary);
+    $("#questionsPage").on("swipeleft", loadNextQuestion).on("swiperight", loadPrevQuestion);
     $("#questionsPage_next").on("click", loadNextQuestion);
     $("#questionsPage_prev").on("click", loadPrevQuestion);
     $("#questionsPage_section_next").on("click", loadNextSection);
