@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
 xmlns:gap = "http://phonegap.com/ns/1.0"
 id        = "com.doersguild.procomp"
-version   = "1.0.9">
+version   = "1.0.10">
 
 	<name>ProGrade</name>
 	<description>Programmer Competency Calculator</description>
@@ -31,7 +31,6 @@ version   = "1.0.9">
     <icon src="icons/android/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:density="xxhdpi" />
 	
 
-	<!-- Splash Screens
-	<gap:splash src="splash.png" width="320" height="72" /> -->
+	<gap:splash src="splash.png" />
 
 </widget>
