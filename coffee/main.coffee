@@ -210,6 +210,7 @@ do ($ = jQuery)=>
       questions?[index]?.selected = level
       window.cookieJar("questions", questions)
       true
+    navigator?.splashscreen?.hide?()
     true
 
   # Setup jQuery defaults

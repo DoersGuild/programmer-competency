@@ -201,6 +201,7 @@ var _this = this,
     return displayQuestion(currentQuestion);
   };
   init = function() {
+    var _ref;
     displayHome();
     document.addEventListener("backbutton", goBack, false);
     $('.button-back').on("click", goBack);
@@ -235,6 +236,13 @@ var _this = this,
       window.cookieJar("questions", questions);
       return true;
     });
+    if (typeof navigator !== "undefined" && navigator !== null) {
+      if ((_ref = navigator.splashscreen) != null) {
+        if (typeof _ref.hide === "function") {
+          _ref.hide();
+        }
+      }
+    }
     return true;
   };
   $.support.cors = true;
