@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
 xmlns:gap = "http://phonegap.com/ns/1.0"
-id        = "com.doersguild.procomp"
-version   = "1.0.4">
+id        = "com.doersguild.ProGrade"
+version   = "1.0.5">
 
 	<name>ProGrade</name>
 	<description>Programmer Competency Calculator</description>
@@ -10,9 +10,15 @@ version   = "1.0.4">
     
     <preference name="orientation" value="default" />
     
+    <!-- If you do not want any permissions to be added to your app, add the
+    following tag to your config.xml; you will still have the INTERNET
+    permission on your app, which PhoneGap requires. -->
+    <preference name="permissions" value="none"/>
+    
+    
 	<access origin="*" subdomains="true" />
     
-    <author href="http://www.doersguild.com" email="ProScore@doersguild.com"> Doers' Guild	</author>
+    <author href="http://www.doersguild.com" email="ProGrade@doersguild.com"> Doers' Guild	</author>
     
 	<!-- Icons -->
 	<icon src="icon.png" gap:role="default" />
@@ -23,6 +29,6 @@ version   = "1.0.4">
 	
 
 	<!-- Splash Screens -->
-	<gap:splash src="splash.png" />
+	<gap:splash src="splash.png" width="320" height="72" />
 
 </widget>
