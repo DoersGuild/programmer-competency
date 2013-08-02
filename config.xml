@@ -2,20 +2,25 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
 xmlns:gap = "http://phonegap.com/ns/1.0"
 id        = "com.doersguild.procomp"
-version   = "1.0.1">
+version   = "1.0.3">
 
-	<name>ProComp</name>
-	<description>Programmer Competency App</description>
+	<name>ProScore</name>
+	<description>Programmer Competency Calculator</description>
 	<preference name="phonegap-version" value="2.9.0" />
     
     <preference name="orientation" value="default" />
     
 	<access origin="*" subdomains="true" />
     
-    <author href="http://www.doersguild.com" email="mail@doersguild.com"> Doers' Guild	</author>
+    <author href="http://www.doersguild.com" email="ProScore@doersguild.com"> Doers' Guild	</author>
     
 	<!-- Icons -->
 	<icon src="icon.png" gap:role="default" />
+    <icon src="icons/android/drawable-mdpi/ic_launcher.png" gap:platform="android" gap:density="mdpi" />
+    <icon src="icons/android/drawable-hdpi/ic_launcher.png" gap:platform="android" gap:density="hdpi" />
+    <icon src="icons/android/drawable-xhdpi/ic_launcher.png" gap:platform="android" gap:density="xhdpi" />
+    <icon src="icons/android/drawable-xxhdpi/ic_launcher.png" gap:platform="android" gap:density="xxhdpi" />
+	
 
 	<!-- Splash Screens -->
 	<gap:splash src="splash.png" />

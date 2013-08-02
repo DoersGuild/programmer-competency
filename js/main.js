@@ -75,8 +75,10 @@ var _this = this,
     var previousPage;
     console.log("page", baseID);
     previousPage = window.cookieJar("currentPage");
-    window.cookieJar("previousPage", previousPage);
-    window.cookieJar("currentPage", baseID);
+    if (baseID !== previousPage) {
+      window.cookieJar("previousPage", previousPage);
+      window.cookieJar("currentPage", baseID);
+    }
     $(previousPage).slideUp("normal", function() {
       return $(baseID).slideDown("normal");
     });
@@ -97,15 +99,6 @@ var _this = this,
       question = questions[index];
       if (question.section !== currentSection) {
         currentSection = question.section;
-        total += parseInt(sectionTotal, 10);
-        sectionCount = parseInt((_ref = window.cookieJar("count_per_section")) != null ? _ref[question.section] : void 0, 10);
-        count += sectionCount;
-        console.log(currentSection, "Counts", sectionTotal, sectionCount, total, count);
-        if (markup !== '') {
-          markup += '<tr><th>Average</th><th>' + (sectionTotal / sectionCount).toFixed(2) + '</th></tr>';
-          markup += '</table>';
-          markup += '</div>';
-        }
         sectionCount = 0;
         sectionTotal = 0;
         markup += '<div class="well well-small">';
@@ -116,7 +109,7 @@ var _this = this,
       }
       markup += '<tr><td>' + question.topic + '</td><td>' + question.selected + '</td></tr>';
       sectionTotal += parseInt(question.selected, 10);
-      if (index === questions.length - 1) {
+      if (((_ref = questions[index + 1]) != null ? _ref.section : void 0) !== currentSection) {
         total += parseInt(sectionTotal, 10);
         sectionCount = parseInt((_ref1 = window.cookieJar("count_per_section")) != null ? _ref1[question.section] : void 0, 10);
         count += sectionCount;

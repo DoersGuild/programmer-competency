@@ -65,8 +65,9 @@ do ($ = jQuery)=>
     console.log "page", baseID
 
     previousPage = window.cookieJar("currentPage")
-    window.cookieJar("previousPage", previousPage)
-    window.cookieJar("currentPage", baseID)
+    if baseID != previousPage
+      window.cookieJar("previousPage", previousPage)
+      window.cookieJar("currentPage", baseID)
 
     $(previousPage).slideUp("normal", ()->$(baseID).slideDown("normal"))
     true
@@ -87,15 +88,6 @@ do ($ = jQuery)=>
       if question.section != currentSection
         # Section change
         currentSection = question.section
-        total += parseInt(sectionTotal, 10)
-        sectionCount = parseInt(window.cookieJar("count_per_section")?[question.section], 10)
-        count += sectionCount
-        console.log currentSection, "Counts", sectionTotal, sectionCount, total, count
-        if markup != ''
-          # Add closing tags iff not first
-          markup += '<tr><th>Average</th><th>'+(sectionTotal/sectionCount).toFixed(2)+'</th></tr>'
-          markup += '</table>'
-          markup += '</div>'
         sectionCount = 0
         sectionTotal = 0
         markup += '<div class="well well-small">'
@@ -106,8 +98,8 @@ do ($ = jQuery)=>
       # Add this topic row
       markup += '<tr><td>'+question.topic+'</td><td>'+question.selected+'</td></tr>'
       sectionTotal += parseInt(question.selected, 10)
-      if index == questions.length-1
-        # Last item
+      if questions[index+1]?.section != currentSection
+        # Last item in section - close it
         total += parseInt(sectionTotal, 10)
         sectionCount = parseInt(window.cookieJar("count_per_section")?[question.section], 10)
         count += sectionCount
