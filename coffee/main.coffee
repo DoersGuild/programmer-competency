@@ -50,8 +50,8 @@ do ($ = jQuery)=>
       # Hide the modal that is currently visible
       $modal.filter(":visible").modal("hide")
     else if window.cookieJar("currentPage") isnt "#homePage"
-      # Go to the previous page
-      displayPage(window.cookieJar("previousPage"))
+      # Go to the previous page - window.cookieJar("previousPage")
+      displayPage("#homePage")
     else
       # Exit the app
       if confirm("Are you sure you want to exit the app?")
