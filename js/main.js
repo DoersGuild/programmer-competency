@@ -204,7 +204,9 @@ var _this = this,
     var _ref;
     displayHome();
     document.addEventListener("backbutton", goBack, false);
-    $('.button-back').on("click", goBack);
+    $('#summaryPage .button-back').on("click", function() {
+      return displayPage("#questionsPage");
+    });
     $('a[target="_blank"]').on("click", function(e) {
       preventDefault(e);
       window.open($(this).prop("href"), '_blank', 'location=yes');

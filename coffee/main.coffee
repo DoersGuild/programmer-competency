@@ -177,7 +177,7 @@ do ($ = jQuery)=>
     # Initialize the app
     displayHome()
     document.addEventListener("backbutton", goBack, false)
-    $('.button-back').on("click", goBack)
+    $('#summaryPage .button-back').on("click", ()->displayPage("#questionsPage"))
     $('a[target="_blank"]').on("click", (e)->
       preventDefault(e)
       window.open($(this).prop("href"), '_blank', 'location=yes')
