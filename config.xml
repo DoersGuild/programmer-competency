@@ -2,11 +2,14 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
 xmlns:gap = "http://phonegap.com/ns/1.0"
 id        = "com.doersguild.procomp"
-version   = "1.0.8">
+version   = "1.0.9">
 
 	<name>ProGrade</name>
 	<description>Programmer Competency Calculator</description>
 	<preference name="phonegap-version" value="2.9.0" />
+	
+	<preference name="target-device" value="universal" />
+	<preference name="android-targetSdkVersion" value="14" />
     
     <preference name="orientation" value="default" />
     
