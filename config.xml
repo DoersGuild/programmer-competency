@@ -10,6 +10,9 @@ version   = "1.1.0">
 	
 	<preference name="target-device" value="universal" />
 	<preference name="android-targetSdkVersion" value="14" />
+	
+	<preference name="splash-screen-duration" value="20000" />
+	<preference name="auto-hide-splash-screen" value="false" />
     
     <preference name="orientation" value="default" />
     

@@ -58,7 +58,7 @@ var _this = this,
     if ($modal.is(":visible")) {
       $modal.filter(":visible").modal("hide");
     } else if (window.cookieJar("currentPage") !== "#homePage") {
-      displayPage(window.cookieJar("previousPage"));
+      displayPage("#homePage");
     } else {
       if (confirm("Are you sure you want to exit the app?")) {
         if (typeof device.exitApp === "function") {
