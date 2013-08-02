@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
 xmlns:gap = "http://phonegap.com/ns/1.0"
-id        = "com.doersguild.ProGrade"
-version   = "1.0.7">
+id        = "com.doersguild.procomp"
+version   = "1.0.8">
 
 	<name>ProGrade</name>
 	<description>Programmer Competency Calculator</description>
